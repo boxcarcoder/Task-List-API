@@ -4,12 +4,12 @@ var express = require('express'), //create a server using express, which was ins
     mongoose = require('mongoose'),
     Task = require('./api/models/todoListModel'), // load our schema/model
     bodyParser = require('body-parser'); // required to handle HTTP POST requests in Express.js Version 4 and up
-    
 
 
-// add a url to the mongoose instance connection to connect the DB 
+
+// add a url to the mongoose instance connection to connect the DB
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/Tododb');
+mongoose.connect('mongodb://localhost/Tododb', {useNewUrlParser: true});
 
 // to allow CORS
 var allowCrossDomain = function(req, res, next) {
@@ -42,5 +42,3 @@ console.log('my todo list RESTful API server started on: ' + port);
 app.use(function(req, res) {
         res.status(404).send({url: req.originalUrl + ' not found'})
 });
-
-
